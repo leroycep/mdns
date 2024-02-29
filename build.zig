@@ -6,11 +6,11 @@ pub fn build(b: *std.Build) void {
 
     const lib = b.addStaticLibrary(.{
         .name = "mdns",
-        .root_source_file = .{ .path = "mdns.c" },
         .target = target,
         .optimize = optimize,
     });
+    lib.addCSourceFile(.{ .file = .{ .path = "mdns.c" } });
     lib.installHeader("mdns.h", "mdns.h");
-    lib.linkLibCpp();
+    lib.linkLibC();
     b.installArtifact(lib);
 }
